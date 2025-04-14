@@ -9,6 +9,7 @@ tablegen(LLVM GfvGenMCPseudoLowering.inc -gen-pseudo-lowering)
 tablegen(LLVM GfvGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM GfvGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM GfvGenAsmWriter.inc -gen-asm-writer)
+tablegen(LLVM GfvGenMCCodeEmitter.inc -gen-emitter)
 
 add_public_tablegen_target(GfvCommonTableGen)
  

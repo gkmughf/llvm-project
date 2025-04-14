@@ -81,4 +81,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeGfvTargetMC() {
 					  createGfvMCSubtargetInfo);
   // Register the MCInstPrinter
   TargetRegistry::RegisterMCInstPrinter(TheGfvTarget, createGfvMCInstPrinter);
+  // Register the MC Code Emitter.
+  TargetRegistry::RegisterMCCodeEmitter(TheGfvTarget, createGfvMCCodeEmitter);
 }

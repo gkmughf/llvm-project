@@ -1,6 +1,15 @@
 #ifndef LLVM_LIB_TARGET_GFV_MCTARGETDESC_GFVMCTARGETDESC_H
 #define LLVM_LIB_TARGET_GFV_MCTARGETDESC_GFVMCTARGETDESC_H
+
+
+namespace llvm {
+  class MCCodeEmitter;
+  class MCContext;
+  class MCInstrInfo;
  
+  MCCodeEmitter *createGfvMCCodeEmitter(const MCInstrInfo &MCII, MCContext &Ctx);
+} // namespace llvm
+
 // Defines symbolic names for Gfv registers.  This defines a mapping from
 // register name to register number.
 //

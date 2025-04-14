@@ -2,6 +2,7 @@ add_llvm_component_library(LLVMGfvDesc
   GfvMCTargetDesc.cpp
   GfvMCAsmInfo.cpp
   GfvInstPrinter.cpp
+  GfvMCCodeEmitter.cpp
   
   LINK_COMPONENTS
   MC
