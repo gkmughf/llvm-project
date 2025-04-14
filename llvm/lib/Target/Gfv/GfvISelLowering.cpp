@@ -39,7 +39,28 @@ GfvTargetLowering::GfvTargetLowering(const TargetMachine &TM,
 				     const GfvSubtarget &STI)
   : TargetLowering(TM), STI(STI) {
   GFV_DUMP_RED
-    addRegisterClass(MVT::i32, &Gfv::GPRRegClass);
+  addRegisterClass(MVT::i32, &Gfv::GPRRegClass);
+  computeRegisterProperties(STI.getRegisterInfo());
+ 
+  setStackPointerRegisterToSaveRestore(Gfv::R1);
+ 
+  // setSchedulingPreference(Sched::Source);
+ 
+  for (unsigned Opc = 0; Opc < ISD::BUILTIN_OP_END; ++Opc)
+    setOperationAction(Opc, MVT::i32, Expand);
+ 
+  setOperationAction(ISD::ADD, MVT::i32, Legal);
+  setOperationAction(ISD::MUL, MVT::i32, Legal);
+  // ...
+  setOperationAction(ISD::LOAD, MVT::i32, Legal);
+  setOperationAction(ISD::STORE, MVT::i32, Legal);
+ 
+  setOperationAction(ISD::Constant, MVT::i32, Legal);
+  setOperationAction(ISD::UNDEF, MVT::i32, Legal);
+ 
+  setOperationAction(ISD::BR_CC, MVT::i32, Custom);
+ 
+  setOperationAction(ISD::FRAMEADDR, MVT::i32, Legal);
 }
  
 const char *GfvTargetLowering::getTargetNodeName(unsigned Opcode) const {
