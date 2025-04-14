@@ -12,6 +12,7 @@ using namespace llvm;
  
 GfvSubtarget::GfvSubtarget(const Triple &TT, const std::string &CPU,
 			   const std::string &FS, const TargetMachine &TM)
-  : GfvGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS), TLInfo(TM, *this) {
+  : GfvGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS), TLInfo(TM, *this),
+    FrameLowering(*this) {
   GFV_DUMP_CYAN
 }

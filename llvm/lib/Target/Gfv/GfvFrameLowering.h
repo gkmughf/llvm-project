@@ -5,13 +5,16 @@
 #include "llvm/CodeGen/TargetFrameLowering.h"
  
 namespace llvm {
- 
+  class GfvSubtarget;
+  
   class GfvFrameLowering : public TargetFrameLowering {
   public:
-    explicit GfvFrameLowering()
-      : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(4), 0) {
-      GFV_DUMP_GREEN
-	}
+    GfvFrameLowering(const GfvSubtarget &STI)
+      : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(4), 0),
+        STI(STI)
+      {
+        GFV_DUMP_GREEN
+      }
  
     /// emitProlog/emitEpilog - These methods insert prolog and epilog code into
     /// the function.
@@ -24,6 +27,9 @@ namespace llvm {
     /// frame pointer register. For most targets this is true only if the function
     /// has variable sized allocas or if frame pointer elimination is disabled.
     bool hasFPImpl(const MachineFunction &MF) const override { return false; }
+
+  private:
+    const GfvSubtarget &STI;
   };
  
 } // namespace llvm
