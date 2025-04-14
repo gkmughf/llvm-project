@@ -8,6 +8,8 @@ namespace llvm {
   extern Target TheGfvTarget;
  
   class GfvTargetMachine : public CodeGenTargetMachineImpl {
+    std::unique_ptr<TargetLoweringObjectFile> TLOF;
+    
   public:
     GfvTargetMachine(const Target &T, const Triple &TT, StringRef CPU,
 		     StringRef FS, const TargetOptions &Options,
@@ -16,6 +18,7 @@ namespace llvm {
 		     bool JIT);
     // Pass Pipeline Configuration
    TargetPassConfig *createPassConfig(PassManagerBase &PM) override;
+   TargetLoweringObjectFile *getObjFileLowering() const override;
   };
 } // end namespace llvm
  
