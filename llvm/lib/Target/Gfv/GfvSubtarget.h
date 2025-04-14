@@ -4,6 +4,7 @@
 #include "Gfv.h"
 #include "GfvFrameLowering.h"
 #include "GfvISelLowering.h"
+#include "GfvRegisterInfo.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
  
 #define GET_SUBTARGETINFO_HEADER
@@ -14,6 +15,7 @@ namespace llvm {
   class GfvSubtarget : public GfvGenSubtargetInfo {
     GfvTargetLowering TLInfo;
     GfvFrameLowering FrameLowering;
+    GfvRegisterInfo RegInfo;
     
   public:
     GfvSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
@@ -31,6 +33,11 @@ namespace llvm {
     const GfvFrameLowering *getFrameLowering() const override {
       GFV_DUMP_CYAN
       return &FrameLowering;
+    }
+
+    const GfvRegisterInfo *getRegisterInfo() const override {
+     GFV_DUMP_CYAN
+     return &RegInfo;
     }
   };
  
