@@ -1,6 +1,7 @@
 #include "GfvTargetMachine.h"
 #include "Gfv.h"
 #include "TargetInfo/GfvTargetInfo.h"
+#include "llvm/CodeGen/TargetPassConfig.h"
 #include "llvm/MC/TargetRegistry.h"
 #include <optional>
  
@@ -23,4 +24,25 @@ GfvTargetMachine::GfvTargetMachine(const Target &T, const Triple &TT,
 			     Reloc::Static, getEffectiveCodeModel(CM, CodeModel::Small), OL) {
   GFV_DUMP_CYAN
   initAsmInfo();
+}
+
+namespace {
+ 
+  /// Gfv Code Generator Pass Configuration Options.
+  class GfvPassConfig : public TargetPassConfig {
+  public:
+    GfvPassConfig(GfvTargetMachine &TM, PassManagerBase &PM)
+      : TargetPassConfig(TM, PM) {}
+ 
+    bool addInstSelector() override {
+      GFV_DUMP_CYAN
+	return false;
+    }
+  };
+ 
+} // end anonymous namespace
+ 
+TargetPassConfig *GfvTargetMachine::createPassConfig(PassManagerBase &PM) {
+  GFV_DUMP_CYAN
+    return new GfvPassConfig(*this, PM);
 }
