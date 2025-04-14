@@ -13,5 +13,5 @@ Target &llvm::getTheGfvTarget() {
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeGfvTargetInfo() {
   GFV_DUMP_YELLOW
     RegisterTarget<Triple::gfv> X(getTheGfvTarget(), "gfv",
-				  "Gfvulator target for LLVM course", "GFV");
+				  "Simulator target for LLVM course", "GFV");
 }

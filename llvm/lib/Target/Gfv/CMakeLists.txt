@@ -1,7 +1,15 @@
 add_llvm_component_group(Gfv)
 
+set(LLVM_TARGET_DEFINITIONS Gfv.td)
+ 
+tablegen(LLVM GfvGenRegisterInfo.inc -gen-register-info)
+ 
+add_public_tablegen_target(GfvCommonTableGen)
+ 
+
 add_llvm_target(GfvCodeGen
   GfvTargetMachine.cpp
+  GfvRegisterInfo.cpp
 
   LINK_COMPONENTS
   CodeGen
