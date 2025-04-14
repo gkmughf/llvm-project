@@ -10,8 +10,8 @@ using namespace llvm;
 #define GET_SUBTARGETINFO_CTOR
 #include "GfvGenSubtargetInfo.inc"
  
-GfvSubtarget::GfvSubtarget(const StringRef &CPU, const StringRef &TuneCPU,
-			   const StringRef &FS, const TargetMachine &TM)
-  : GfvGenSubtargetInfo(TM.getTargetTriple(), CPU, TuneCPU, FS) {
+GfvSubtarget::GfvSubtarget(const Triple &TT, const std::string &CPU,
+			   const std::string &FS, const TargetMachine &TM)
+  : GfvGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS), TLInfo(TM, *this) {
   GFV_DUMP_CYAN
 }

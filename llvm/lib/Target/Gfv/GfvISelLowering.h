@@ -21,7 +21,19 @@ namespace llvm {
 	};
  
   } // namespace GfvISD
+  
+  class GfvTargetLowering : public TargetLowering {
+  public:
+    explicit GfvTargetLowering(const TargetMachine &TM, const GfvSubtarget &STI);
  
+    /// This method returns the name of a target specific DAG node.
+    const char *getTargetNodeName(unsigned Opcode) const override;
+ 
+    GfvSubtarget const &getSubtarget() const { return STI; }
+ 
+  private:
+    const GfvSubtarget &STI;
+  };
 } // end namespace llvm
  
 #endif // LLVM_LIB_TARGET_GFV_GFVISELLOWERING_H
