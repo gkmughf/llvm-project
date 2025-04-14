@@ -1,5 +1,6 @@
 #include "MCTargetDesc/GfvInfo.h"
 #include "Gfv.h"
+#include "GfvInstPrinter.h"
 #include "GfvMCAsmInfo.h"
 #include "TargetInfo/GfvTargetInfo.h"
 #include "llvm/MC/MCDwarf.h"
@@ -56,6 +57,16 @@ static MCAsmInfo *createGfvMCAsmInfo(const MCRegisterInfo &MRI,
   return MAI;
 }
 
+static MCInstPrinter *createGfvMCInstPrinter(const Triple &T,
+                                              unsigned SyntaxVariant,
+                                              const MCAsmInfo &MAI,
+                                              const MCInstrInfo &MII,
+                                              const MCRegisterInfo &MRI) {
+   GFV_DUMP_MAGENTA
+   return new GfvInstPrinter(MAI, MII, MRI);
+ }
+
+
 // We need to define this function for linking succeed
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeGfvTargetMC() {
   GFV_DUMP_MAGENTA
@@ -68,4 +79,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeGfvTargetMC() {
   // Register the MC subtarget info.
   TargetRegistry::RegisterMCSubtargetInfo(TheGfvTarget,
 					  createGfvMCSubtargetInfo);
+  // Register the MCInstPrinter
+  TargetRegistry::RegisterMCInstPrinter(TheGfvTarget, createGfvMCInstPrinter);
 }
