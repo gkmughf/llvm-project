@@ -4,7 +4,9 @@
 #include "Gfv.h"
 #include "GfvFrameLowering.h"
 #include "GfvISelLowering.h"
+#include "GfvInstrInfo.h"
 #include "GfvRegisterInfo.h"
+#include "llvm/CodeGen/SelectionDAGTargetInfo.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
  
 #define GET_SUBTARGETINFO_HEADER
@@ -16,6 +18,8 @@ namespace llvm {
     GfvTargetLowering TLInfo;
     GfvFrameLowering FrameLowering;
     GfvRegisterInfo RegInfo;
+    GfvInstrInfo InstrInfo;
+    SelectionDAGTargetInfo TSInfo;
     
   public:
     GfvSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
@@ -38,6 +42,12 @@ namespace llvm {
     const GfvRegisterInfo *getRegisterInfo() const override {
      GFV_DUMP_CYAN
      return &RegInfo;
+    }
+    
+    const GfvInstrInfo *getInstrInfo() const override { return &InstrInfo; }
+    const SelectionDAGTargetInfo *getSelectionDAGInfo() const override {
+      GFV_DUMP_CYAN
+	return &TSInfo;
     }
   };
  
