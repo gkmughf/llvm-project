@@ -1,7 +1,7 @@
 #ifndef LLVM_LIB_TARGET_GFV_MCTARGETDESC_GFVMCTARGETDESC_H
 #define LLVM_LIB_TARGET_GFV_MCTARGETDESC_GFVMCTARGETDESC_H
 
-
+#include <memory>
 namespace llvm {
   class MCCodeEmitter;
   class MCContext;
@@ -18,6 +18,8 @@ namespace llvm {
   MCAsmBackend *createGfvAsmBackend(const Target &T, const MCSubtargetInfo &STI,
                                    const MCRegisterInfo &MRI,
                                    const MCTargetOptions &Options);
+  std::unique_ptr<MCObjectTargetWriter> createGfvELFObjectWriter(bool Is64Bit,
+                                                                uint8_t OSABI);
 } // namespace llvm
 
 // Defines symbolic names for Gfv registers.  This defines a mapping from
