@@ -21,6 +21,7 @@ add_llvm_target(GfvCodeGen
   GfvAsmPrinter.cpp
   GfvISelDagToDag.cpp
   GfvISelLowering.cpp
+  GfvMCInstLower.cpp
   
   LINK_COMPONENTS
   CodeGen

@@ -23,7 +23,20 @@
 namespace llvm {
   class GfvTargetMachine;
   class FunctionPass;
- 
+  class GfvSubtarget;
+  class AsmPrinter;
+  class InstructionSelector;
+  class MCInst;
+  class MCOperand;
+  class MachineInstr;
+  class MachineOperand;
+  class PassRegistry;
+
+  bool lowerGfvMachineInstrToMCInst(const MachineInstr *MI, MCInst &OutMI,
+				    AsmPrinter &AP);
+  bool LowerGfvMachineOperandToMCOperand(const MachineOperand &MO,
+					 MCOperand &MCOp, const AsmPrinter &AP);
+  
   FunctionPass *createGfvISelDag(GfvTargetMachine &TM, CodeGenOptLevel OptLevel);
  
 } // namespace llvm
