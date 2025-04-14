@@ -3,6 +3,7 @@
 
 #include "MCTargetDesc/GfvMCTargetDesc.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Target/TargetMachine.h"
 
 #define GFV_DUMP(Color)                                                        \
   {                                                                            \
@@ -18,5 +19,13 @@
 #define GFV_DUMP_CYAN GFV_DUMP(llvm::raw_ostream::CYAN)
 #define GFV_DUMP_MAGENTA GFV_DUMP(llvm::raw_ostream::MAGENTA)
 #define GFV_DUMP_WHITE GFV_DUMP(llvm::raw_ostream::WHITE)
+
+namespace llvm {
+  class GfvTargetMachine;
+  class FunctionPass;
+ 
+  FunctionPass *createGfvISelDag(GfvTargetMachine &TM, CodeGenOptLevel OptLevel);
+ 
+} // namespace llvm
 
 #endif // LLVM_LIB_TARGET_Gfv_Gfv_H

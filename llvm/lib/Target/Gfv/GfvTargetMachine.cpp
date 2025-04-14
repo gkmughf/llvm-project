@@ -33,10 +33,15 @@ namespace {
   public:
     GfvPassConfig(GfvTargetMachine &TM, PassManagerBase &PM)
       : TargetPassConfig(TM, PM) {}
- 
+
+    GfvTargetMachine &getGfvTargetMachine() const {
+      return getTM<GfvTargetMachine>();
+    }
+    
     bool addInstSelector() override {
       GFV_DUMP_CYAN
-	return false;
+      addPass(createGfvISelDag(getGfvTargetMachine(), getOptLevel()));
+      return false;
     }
   };
  
@@ -44,5 +49,5 @@ namespace {
  
 TargetPassConfig *GfvTargetMachine::createPassConfig(PassManagerBase &PM) {
   GFV_DUMP_CYAN
-    return new GfvPassConfig(*this, PM);
+  return new GfvPassConfig(*this, PM);
 }
