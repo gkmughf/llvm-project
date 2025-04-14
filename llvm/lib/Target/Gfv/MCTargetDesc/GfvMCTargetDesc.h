@@ -6,5 +6,10 @@
 //
 #define GET_REGINFO_ENUM
 #include "GfvGenRegisterInfo.inc"
- 
+
+
+// Defines symbolic names for the Gfv instructions.
+#define GET_INSTRINFO_ENUM
+#include "GfvGenInstrInfo.inc"
+
 #endif // LLVM_LIB_TARGET_GFV_MCTARGETDESC_GFVMCTARGETDESC_H

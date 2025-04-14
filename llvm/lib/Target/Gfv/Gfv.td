@@ -1,4 +1,8 @@
 include "llvm/Target/Target.td"
 include "GfvRegisterInfo.td"
+include "GfvInstrInfo.td"
 
-def Gfv : Target;
+def GfvInstrInfo : InstrInfo;
+def Gfv : Target {
+  let InstructionSet = GfvInstrInfo;
+}
