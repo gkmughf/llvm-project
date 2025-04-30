@@ -65,3 +65,8 @@ def PUTPIXEL : GfvInst<0xFE, (outs), (ins GPR:$r1, GPR:$r2, GPR:$r3_imm),
 // rand
 let r2 = 0, r3_imm = 0 in
 def RAND : GfvInst<0xFD, (outs GPR:$r1), (ins), "RAND $r1", [(set GPR:$r1, (int_gfv_rand))]>;
+
+// clear
+let r2 = 0, r3_imm = 0 in
+def CLEAR : GfvInst<0xFD, (outs), (ins GPR:$r1),
+                      "PUTPIXEL $r1", [(int_gfv_clear GPR:$r1)]>;

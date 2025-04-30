@@ -8,4 +8,7 @@ def int_gfv_flush: ClangBuiltin<"gfvFlush">,
 
 def int_gfv_rand: ClangBuiltin<"gfvRand">,
   Intrinsic<[llvm_i32_ty], [], [IntrNoMem]>;
+
+def int_gfv_clear: ClangBuiltin<"gfvClear">,
+  Intrinsic<[], [llvm_i32_ty], [IntrNoMem, IntrHasSideEffects]>;
 } // TargetPrefix = "gfv"

@@ -1,5 +1,6 @@
 BUILTIN(gfvPutPixel, "vUiUiUi", "nc")
 BUILTIN(gfvFlush, "v", "nc")
 BUILTIN(gfvRand, "Ui", "nc")
+BUILTIN(gfvClear, "vUi", "nc")
 
 #undef BUILTIN
